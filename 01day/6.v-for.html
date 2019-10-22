@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        table{
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 600px;
+            text-align: center;
+            margin: 30px auto;
+        }
+        ul li{
+            list-style: none;
+        }
+        ul li img{
+            width: 300px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li>{{name}}</li>
+            <li>{{age}}</li>
+            <li>{{love}}</li>
+        </ul>
+
+        <ol>
+            <li v-for="(item,index) in arr" :key="index">
+                {{item}}
+            </li>
+        </ol>
+
+       <p v-for="(item,index) in obj" :key="index">
+           {{item}} -- {{index}}
+       </p>
+
+        <hr>
+
+<!--        <ul>-->
+<!--            <li v-for="(item,index) in info">-->
+<!--                <span>{{item.id}}</span>-->
+<!--                <span>{{item.product_name}}</span>-->
+<!--                <span>{{item.size}}</span>-->
+<!--                <span>{{item.price}}</span>-->
+<!--            </li>-->
+<!--        </ul>-->
+
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>商品名称</th>
+                    <th>商品尺寸</th>
+                    <th>商品价格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in info" :key="index">
+                    <td>{{item.id}}</td>
+                    <td>{{item.product_name}}</td>
+                    <td>{{item.size}}</td>
+                    <td>{{item.price}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+        <ul>
+           <li v-for="(item,index) in sliders.banner" :key="index">
+               <img v-bind:src="item.img" alt="">
+               <p>{{item.title}}</p>
+           </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            name : "jack",
+            age : 100,
+            love : "女",
+            arr : ["王者荣耀","英雄联盟","qq飞车","qq炫舞"],
+            obj : {name : "盲僧",sex: "男", info: "我用双手成就你的梦想"},
+            info : [
+                {id : 1, product_name : "上衣", size : "small", price : "998"},
+                {id : 2, product_name : "裤子", size : "small", price : "998"},
+                {id : 3, product_name : "鞋子", size : "small", price : "998"},
+                {id : 4, product_name : "杯子", size : "small", price : "998"}
+            ],
+            sliders : {
+                banner : [
+                    {"title" : "第1章图片", img : "https://img11.360buyimg.com/babel/s1920x740_jfs/t1/48012/34/13770/169778/5da95cd7Ea55eff63/ce6b01f24a8c1328.jpg!cc_1920x740"},
+                    {"title" : "第2张图片", img : "https://img11.360buyimg.com/babel/s1920x740_jfs/t1/48012/34/13770/169778/5da95cd7Ea55eff63/ce6b01f24a8c1328.jpg!cc_1920x740"},
+                    {"title" : "第3章图片", img : "https://img11.360buyimg.com/babel/s1920x740_jfs/t1/48012/34/13770/169778/5da95cd7Ea55eff63/ce6b01f24a8c1328.jpg!cc_1920x740"},
+                    {"title" : "第4章图片", img : "https://img11.360buyimg.com/babel/s1920x740_jfs/t1/48012/34/13770/169778/5da95cd7Ea55eff63/ce6b01f24a8c1328.jpg!cc_1920x740"}
+                ]
+            }
+        }
+    })
+
+
+</script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <div>
+            <input type="text" v-model="name" placeholder="请输入内容">
+            <button v-on:click="show">search</button>
+        </div>
+
+
+        <div class="list" v-if="flag == 1">
+            <h4>热搜榜</h4>
+            <ul>
+                <li>遮天</li>
+                <li>遮天</li>
+                <li>遮天</li>
+                <li>遮天</li>
+                <li>遮天</li>
+                <li>遮天</li>
+                <li>遮天</li>
+                <li>遮天</li>
+            </ul>
+        </div>
+
+        <div class="list" v-if="flag ==2">
+            <h4>男生榜</h4>
+            <ul>
+                <li>英雄联盟</li>
+                <li>英雄联盟</li>
+                <li>英雄联盟</li>
+                <li>英雄联盟</li>
+                <li>英雄联盟</li>
+            </ul>
+        </div>
+
+        <div class="list" v-if="flag == 3">
+            <h4>女生榜</h4>
+            <ul>
+                <li>qq飞车</li>
+                <li>qq飞车</li>
+                <li>qq飞车</li>
+                <li>qq飞车</li>
+                <li>qq飞车</li>
+                <li>qq飞车</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            flag : 1,
+            name : ""
+        },
+        methods : {
+            show(){
+                if(this.name == "男生榜"){
+                    this.flag = 2
+                }else if(this.name == "女生榜"){
+                    this.flag = 3
+                }
+            }
+        }
+    })
+
+</script>

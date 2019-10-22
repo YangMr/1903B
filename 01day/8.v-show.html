@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <button v-on:click="show">toggle</button>
+
+        <div v-show="flag" class="box"></div>
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            flag : false
+        },
+        methods : {
+            show(){
+                this.flag = !this.flag
+            }
+        }
+
+    })
+
+</script>

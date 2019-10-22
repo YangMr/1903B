@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        table{
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 600px;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <label for="">书名:</label> <input v-model="user.name" type="text" placeholder="请输入书名">
+        <label for="">价格:</label> <input v-model="user.price" type="text" placeholder="请输入书名">
+        <label for="">作者:</label> <input v-model="user.auth" type="text" placeholder="请输入书名">
+
+        <button v-on:click="addBook">Add Book</button>
+
+
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>书名</th>
+                    <th>价格</th>
+                    <th>作者</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in bookArray">
+                    <td>{{item.bookName}}</td>
+                    <td>{{item.bookPrice}}</td>
+                    <td>{{item.bookAuth}}</td>
+                    <td>
+                        <button v-on:click="del(index)">删除</button>
+                        <button>修改</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <button v-on:click="delAll">全部删除</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            bookArray : [
+                {bookName : "HTML实战", bookPrice:30, bookAuth:"mrYang"},
+                {bookName : "JAVASCRIPT", bookPrice:33, bookAuth:"mrYang"},
+                {bookName : "JQUERY", bookPrice:38, bookAuth:"mrYang"},
+                {bookName : "VUE", bookPrice:100, bookAuth:"mrYang"}
+            ],
+            // name : "",
+            // price : "",
+            // auth : ""
+            user : {
+                name : "",
+                price : "",
+                auth : ""
+            }
+        },
+        methods : {
+            addBook(){
+
+                this.bookArray.push({
+                    bookName : this.user.name,
+                    bookPrice : this.user.price,
+                    bookAuth : this.user.auth
+                })
+            },
+            del(index){
+                this.bookArray.splice(index,1);
+            },
+            delAll(){
+                this.bookArray = [];
+            }
+        }
+    })
+
+</script>

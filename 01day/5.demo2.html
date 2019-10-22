@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <p>
+            <label for="">用户名:</label>
+            <input type="text" v-model="v" placeholder="请输入用户名">
+            <span>{{message}}</span>
+        </p>
+        <p>
+            <button v-on:click="submit">提交</button>
+        </p>
+
+    </div>
+</body>
+</html>
+<script>
+
+    var app = new Vue({
+        el : "#app",
+        data : {
+            message : "",
+            v : ""
+        },
+        methods : {
+            submit(){
+                //如何文本框有内容，则设置message的值为正确
+                //如果文本框的内容为空，则设置message的值为用户名不能为空
+                if(this.v == ""){
+                    this.message = "用户名不能为空";
+                }else{
+                    this.message = "正确"
+                }
+            }
+        }
+    });
+
+
+</script>
