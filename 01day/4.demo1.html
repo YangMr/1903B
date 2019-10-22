@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <input type="button" value="+" @click="add">
+        {{count}}
+        <input type="button" value="-" v-on:click="jian" >
+
+    </div>
+
+
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            count : 0
+        },
+        methods : {
+            add(){
+                this.count++;
+                if(this.count >= 10){
+                    this.count = 10;
+                }
+            },
+            jian(){
+                this.count--;
+                if(this.count <= 0){
+                    this.count = 0;
+                }
+            }
+        }
+    })
+
+</script>

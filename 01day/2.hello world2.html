@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <input type="text" v-model="message">
+
+        <h1>{{message}}</h1>
+    </div>
+
+
+</body>
+</html>
+<script>
+
+    //进行实例化
+    new Vue({
+        el : "#app",  //el表示要控制的代码区域
+        data : {        //存储初始化数据的地方
+            message : "hello world 123"
+        }
+    })
+
+</script>

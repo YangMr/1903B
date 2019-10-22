@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <input type="text" v-on:input="changeTitle">
+
+        <hr>
+
+        <p>{{title}}</p>
+
+        <hr>
+        <p>
+            {{name}}
+        </p>
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {   //data存放的是数据
+            title : "",
+            name : "hello"
+        },
+        methods : { //methods里面写的是方法
+            changeTitle(e){
+                //将文本框输入的数据保存到inputvalue这个变量里面
+               var inputValue = e.target.value;
+
+               this.title = inputValue;
+               this.name = inputValue
+            }
+        }
+    })
+
+</script>

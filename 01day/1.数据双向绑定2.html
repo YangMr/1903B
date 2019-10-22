@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="title" value="">
+<h2 id="h"></h2>
+
+</body>
+</html>
+<script>
+
+    var title = document.getElementById("title");
+    var h = document.getElementById("h");
+
+    var str = "hello"
+
+    title.value = str;
+    h.innerHTML = str;
+
+    title.oninput = function (e) {
+        str = e.target.value;
+
+        title.value = str;
+        h.innerHTML = str;
+    }
+
+
+</script>
