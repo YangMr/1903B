@@ -2,9 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
 </head>
 <body>
-$END$
+    <div id="app">
+
+        <button @click="count+=5">+5</button>
+        <button @click="count++">+1</button>
+
+        <hr>
+
+        <p>{{count}}</p>
+
+        <hr>
+
+        <p>{{result}}</p>
+
+
+    </div>
 </body>
 </html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            count : 0
+        },
+        computed : {
+            result(){
+                return  this.count > 37 ? "max" : "small";
+
+            }
+        },
+        watch : {
+            count(newValue,oldValue){
+                var vm = this;
+               if(newValue > 37){
+                   setTimeout(function () {
+                       vm.count = 0;
+                   },2000)
+               }
+            }
+        }
+    })
+
+</script>

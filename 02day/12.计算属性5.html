@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <button v-on:click="count++">Increment</button>
+        <button v-on:click="count--">Decrement</button>
+
+        <button v-on:click="secondCount+=2">clicks</button>
+        <hr>
+
+        <p>{{count}} </p>
+
+        <hr>
+
+        <p>{{result()}}  | {{num}}</p>
+
+        <hr>
+
+        <p>{{secondCount}}</p>
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            count : 0,
+            text : "",
+            secondCount : 0
+        },
+        computed : {
+            num(){
+                console.log("computed")
+                return this.text = this.count > 10 ? "max" : "small";
+            }
+        },
+        methods : {
+            result(){
+                console.log("hello")
+                return this.text = this.count > 10 ? "max" : "small";
+            }
+        }
+    })
+
+
+
+
+</script>

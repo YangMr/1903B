@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>
+
+    </p>
+</body>
+</html>
+<script>
+
+    var op = document.getElementsByTagName("p")[0];
+
+
+    var str = "123,456";  //456123
+
+   console.log(str.split(",").reverse().join(""))
+
+    op.innerHTML = str.split(",").reverse().join("")
+
+</script>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <p>{{text}}</p>
+
+    </div>
+
+    <hr>
+
+    <div id="app2">
+
+        <p>{{result}}</p>
+
+    </div>
+
+
+</body>
+</html>
+<script>
+
+    var app = new Vue({
+        el : "#app",
+        data : {
+            text : "123,456"
+        }
+    });
+
+
+    var app2 = new Vue({
+        el : "#app2",
+        data : {
+
+        },
+        computed : {
+            result(){
+                return app.text.split(",").reverse().join(" ")
+            }
+        }
+    })
+
+
+   
+</script>

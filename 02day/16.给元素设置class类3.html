@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+
+        .box{
+            width: 150px;
+            height: 150px;
+            border: 1px solid #eee;
+            margin: 20px;
+            float: left;
+            background: gray;
+        }
+
+        .cRed{
+            width: 150px;
+            height: 150px;
+            border: 1px solid #eee;
+            margin: 20px;
+            float: left;
+            background: red;
+        }
+
+        .cYellow{
+            background: yellow;
+        }
+
+        .cBlue{
+            background:  blue;
+        }
+        .f18{
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+        <div @click="isActive=!isActive" :class="classes">1</div>
+
+        
+    </div>
+
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            isActive: true
+        },
+        computed : {
+            classes(){
+                return {
+                    'box' :this.isActive,
+                    'cRed' :!this.isActive
+                }
+            }
+        }
+    })
+
+</script>

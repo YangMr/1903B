@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <p>{{fullName}}</p>
+
+    </div>
+
+
+</body>
+</html>
+<script>
+
+    var app = new Vue({
+        el : "#app",
+        data : {
+            firstName : "jack",
+            lastName : "rose"
+        },
+        computed : {
+            fullName(){
+                return this.firstName + " " + this.lastName;
+            }
+            // fullName : {
+            //    get(){
+            //        return this.firstName + " " + this.lastName
+            //    },
+            //
+            //    set(newValue){
+            //
+            //        var data = newValue.split(" ");
+            //        this.firstName = data[0];
+            //        this.lastName = data[1]
+            //    }
+            // }
+        }
+    });
+
+    // app.fullName = "老王 老宋"
+
+
+</script>
