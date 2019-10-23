@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        .box{width: 200px; height: 200px; background: red;  position: absolute; left: 0; top: 0;}
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <input type="text" v-on:keydown.tab="h" v-on:keydown.down="jian"  v-on:keydown.up="test" v-bind:value="count">
+
+
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            count : 0
+        },
+        methods:{
+            test(){
+                this.count++;
+            },
+            jian(){
+                this.count--;
+            },
+            h(){
+                this.count = "hello"
+            }
+        }
+    })
+
+
+</script>

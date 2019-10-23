@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            text-align: center;
+            line-height: 200px;
+        }
+        .box:nth-child(1){
+            background: yellow;
+        }
+        .box:nth-child(2){
+            background: red;
+        }
+        .box:nth-child(3){
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <div class="box" v-if="status == 1">内容1</div>
+        <div class="box" v-else-if="status == 2">内容2</div>
+        <div class="box" v-else>内容3</div>
+
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            status : 3
+        },
+        methods : {
+
+        }
+    })
+
+</script>

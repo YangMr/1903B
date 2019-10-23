@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <p v-once>{{title}}</p>
+
+        <hr>
+
+        {{result()}}
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            title : "hello"
+        },
+        methods : {
+            result(){
+                this.title = "123"
+                return this.title
+            }
+        }
+    })
+
+</script>

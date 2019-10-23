@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <a v-on:click="message" href="https://www.baidu.com">百度</a>
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+
+        },
+        methods : {
+            message(e){
+                e.preventDefault();
+                alert("hello world")
+            }
+        }
+    })
+
+
+</script>

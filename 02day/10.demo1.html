@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <template v-if="type == 'name'">
+            <label for="">用户名</label>
+            <input type="text" placeholder="请输入用户名">
+        </template>
+
+        <tamplate v-else>
+            <label for="">邮箱:</label>
+            <input type="email" placeholder="请输入邮箱">
+        </tamplate>
+
+        <button v-on:click="handleToggle">切换</button>
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            type : 'name'
+        },
+        methods : {
+            handleToggle(){
+                this.type = this.type == "name" ? "email" : "name";
+            }
+        }
+    })
+
+
+</script>

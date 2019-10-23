@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        .box{width: 200px; height: 200px; background: red;  position: absolute; left: 0; top: 0;}
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <input type="text" v-on:keydown="test" v-bind:value="count">
+
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            count : 0
+        },
+        methods:{
+            test(e){
+                if(e.keyCode == 38){
+                    this.count++;
+                    return;
+                }
+                if(e.keyCode == 40){
+                    this.count--;
+                    return;
+                }
+            }
+        }
+    })
+
+
+</script>

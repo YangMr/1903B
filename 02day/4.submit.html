@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form  action="http://localhost:3000" method="get">
+            <p>
+                <label for="">用户名:</label>
+                <input type="text" placeholder="请输入用户名" name="user">
+            </p>
+            <p>
+                <label for="">密码:</label>
+                <input type="password" placeholder="请输入密码" name="pass">
+            </p>
+            <p>
+<!--                <button>提交</button>-->
+                <input type="button" value="tijiao">
+            </p>
+        </form>
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+
+        },
+        methods : {
+
+        }
+    })
+
+
+</script>

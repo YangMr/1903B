@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <button id="btn">click</button>
+
+    <div id="app">
+        {{title}}
+
+        <hr>
+
+        {{count}}
+
+        <hr>
+
+        <button v-on:click="count+=2">increment</button>
+        <button v-on:click="count-=2">decrement</button>
+
+        <hr>
+
+        {{count > 10 ? "jack" : "rose"}}
+    </div>
+</body>
+</html>
+<script>
+
+
+
+    new Vue({
+        el : "#app",
+        data : {
+            title : "hello vue",
+            count : 0
+        },
+        methods : {
+
+        }
+    })
+
+</script>
