@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+        body,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .list-body li:nth-child(even) {
+            background: yellow;
+        }
+        .list-body li:nth-child(odd) {
+            background: #fff;
+        }
+        .list-body li:hover {
+            background: green;
+        }
+        .list-body li.checkedColor {
+            background: green;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/baidu.css" />
+    <script src="js/vue.min.js"></script>
+</head>
+
+<body>
+<div class="wrap" id="app">
+    <div class="baidu">
+        <ul class="list list-head">
+            <li>
+                <div><input type="checkbox" v-model="isCheckedAll" />全选</div>
+                <span>歌单</span>
+                <span>歌手</span>
+                <span>专辑</span>
+            </li>
+        </ul>
+        <ul class="list list-body">
+            <!-- <li class="checkedColor" v-for="item in data"> -->
+            <li class="" v-for="item in songList">
+                <div>
+                    <input type="checkbox" v-model="item.checked" />
+                </div>
+                <span>{{ item.song }}</span>
+                <span>{{ item.name }}</span>
+                <span>{{ item.album }}</span>
+            </li>
+        </ul>
+        <div class="select">
+          <span class="selectAll">
+            <span>统计：</span>
+          </span>
+
+            <div class="others">
+                <span><em></em>歌手有：{{ selectSongersLen }}位</span>
+                <span><em></em>专辑有{{ albums }}张</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let data = [
+        {
+            id: Date.now() + Math.random(),
+            name: "邓紫棋",
+            song: "泡沫",
+            checked: true,
+            album: 10
+        },
+        {
+            id: Date.now() + Math.random(),
+            name: "王杰",
+            song: "泡沫",
+            checked: true,
+            album: 10
+        },
+        {
+            id: Date.now() + Math.random(),
+            name: "邓紫棋",
+            song: "泡沫",
+            checked: true,
+            album: 10
+        }
+    ];
+
+    new Vue({
+        el: "#app",
+        data: {
+            songList: data
+        },
+        computed: {
+            // 只能取值，不能设置值,为函数
+            //   isCheckedAll() {
+            //     let bl = this.songList.every(item => {
+            //       return item.checked;
+            //     });
+            //     //   let bl=this.songList.every(function(item){return item.checked});
+            //     return bl;
+            //     console.log(bl);
+            //   },
+            //   改为对象，可设置，可取值
+            isCheckedAll: {
+                get() {
+                    let bl = this.songList.every(item => {
+                        return item.checked;
+                    });
+                    return bl;
+                    console.log(bl);
+                },
+                set(newVal) {
+                    console.log("newVal",newVal);
+                    // 利用表头的全选单选框控制分表里每一个信息的选择状态，所以遍历每一项统一kongzhi
+                    this.songList.forEach(item=>item.checked=newVal);
+                }
+            },
+            selectSongersLen() {
+                // return this.songList.filter(item => item.checked).length;
+                let songer = this.songList.filter(item => item.checked);
+                console.log("songer", songer);
+                // songer (3) [{…}, {…}, {…}]0: {…}album: (...)checked: (...)id: (...)name: (...)song: (...)__ob__: Observer {value: {…}, dep: Dep, vmCount: 0}get album: ƒ reactiveGetter()set album: ƒ reactiveSetter(newVal)get checked: ƒ reactiveGetter()set checked: ƒ reactiveSetter(newVal)get id: ƒ reactiveGetter()set id: ƒ reactiveSetter(newVal)get name: ƒ reactiveGetter()set name: ƒ reactiveSetter(newVal)get song: ƒ reactiveGetter()set song: ƒ reactiveSetter(newVal)__proto__: Object1: {…}2: {…}length: 3__proto__: Array(0)
+
+                return fn(songer).length;
+            },
+            albums() {
+                let n = 0;
+                this.songList
+                    .filter(item => item.checked)
+                    .forEach(item => {
+                        n += item.album;
+                    });
+                return n;
+                console.log(n);
+            }
+        }
+    });
+    function fn(option) {
+        var json = {};
+        var arr = [];
+        option.forEach(item => {
+            console.log("json[item.name]", json[item.name]);
+            console.info("json", json);
+            if (!json[item.name]) {
+                json[item.name] = true;
+                arr.push(item);
+            }
+        });
+        // console.log(arr);
+        return arr;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>,
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in list">
+                    <td><input type="checkbox"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>选中个数:</td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            list : [
+                {check : false},
+                {check : false},
+                {check : false},
+                {check : false},
+                {check : false},
+                {check : false},
+                {check : false}
+            ]
+        },
+        methods : {
+
+        },
+        computed : {
+
+        },
+        watch : {
+
+        }
+    })
+
+</script>

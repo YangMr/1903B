@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	.todolistDiv{
+		margin:200px auto;
+		width:220px;
+		height: auto;
+	}
+	.btn{		
+		opacity: 0.5;
+		border: none;
+		margin-left: 10px;
+	}
+	.ipt{
+		box-shadow:0 0 8px #9668db;
+		border:none;
+	}
+	span{
+		font-size: 50px;
+	}
+	.liDiv{
+		margin-top: 10px;
+	}
+	.complete{
+		color: blue;
+	}
+	</style>
+</head>
+<body>
+<!-- todolist练手项目 -->
+	<div id="vue-todolist" class="todolistDiv">
+	<span> todolist</span>
+		<input class="ipt" type="text" v-model="inputVaule" v-on:keyup.enter="add"/>
+		<button v-on:click="add" class="btn">add</button>
+		<ul >
+			<li v-for="item in items" >
+			<div class="liDiv">
+				<input type="checkbox" v-model="item.completed">
+				<label  v-bind:class="{ complete:item.completed }">{{item.text}}</label>
+				<button v-on:click="removeTodo(item)" class="btn">x</button></li>
+			</div>
+		</ul>
+	</div>
+	<!-- vue框架 -->
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="vue-resource.js"></script>
+	<script src="vuetest.js"></script>
+
+</body>
+</html>
+
+

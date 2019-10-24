@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        html,body,div,ul,li,a,span,strong{margin: 0; padding: 0;}
+        ol,ul{list-style: none;}
+        .app-wrap{width: 600px; margin: 20px auto; border-radius: 3px; border: 1px solid #ccc; padding: 10px;}
+        .app-wrap .app-header{}
+        .app-wrap .app-header input{width: 100%; text-indent: 2em; font-size: 14px; border: 1px solid #ccc; height: 33px; border-radius: 3px;}
+        .app-wrap .app-main{margin-top: 20px; border: 1px solid #ccc; border-radius: 3px; border-bottom: none;}
+        .app-wrap ul li{height: 35px; border-bottom: 1px solid #ccc; line-height: 35px; font-size: 12px;}
+        .app-wrap ul li button{float: right; position: relative; cursor: pointer; top: 8px; right: 20px;}
+        .app-wrap .app-footer{padding: 20px 0;}
+        .app-wrap .app-footer button{float: right; cursor: pointer; position: relative; top: 8px; right: 20px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <div class="app-wrap">
+            <!--header-->
+            <div class="app-header">
+                <input type="text" placeholder="请输入要添加的任务">
+            </div>
+            <!--main-->
+            <div class="app-main">
+                <ul>
+                    <li v-for="(item,index) in list">
+                        <input type="checkbox">
+                        <strong>{{item.task}}</strong>
+                        <button>删除</button>
+                    </li>
+                </ul>
+            </div>
+            <!--底部-->
+            <div class="app-footer">
+                <input type="checkbox">
+                <span>已完成0件/总计{{list.length}}件</span>
+                <button>清除已完成的任务</button>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            list:[
+                {id : 1, task : "我今天要好好学习1", check : false},
+                {id : 2, task : "我今天要好好学习2", check : false},
+                {id : 3, task : "我今天要好好学习3", check : false},
+                {id : 4, task : "我今天要好好学习4", check : false},
+                {id : 5, task : "我今天要好好学习5", check : false},
+            ]
+        },
+        methods : {
+
+        },
+        computed : {
+
+        },
+        watch : {
+
+        }
+    })
+
+
+</script>

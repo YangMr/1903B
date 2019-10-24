@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63d15753-52f2-41c1-84ad-f06ade9c560a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue课件/第二单元 vue进阶.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue课件/第二单元 vue进阶.md" afterDir="false" />
-    </list>
+    <list default="true" id="63d15753-52f2-41c1-84ad-f06ade9c560a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,37 +14,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/03day/1.随机点名表.html">
+        <entry file="file://$PROJECT_DIR$/03day/6.todo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="104" column="13" lean-forward="true" selection-start-line="104" selection-start-column="13" selection-end-line="104" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/03day/2.购物车.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
-              <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
+            <state relative-caret-position="-880">
+              <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/03day/2.购物车2.html">
+        <entry file="file://$PROJECT_DIR$/03day/6.todo2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="138" column="31" selection-start-line="138" selection-start-column="31" selection-end-line="138" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/03day/3.v-cloak.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+            <state relative-caret-position="90">
+              <caret line="86" column="77" lean-forward="true" selection-start-line="86" selection-start-column="77" selection-end-line="86" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -68,10 +47,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/01day/4.demo1.html" />
-        <option value="$PROJECT_DIR$/01day/5.demo2.html" />
-        <option value="$PROJECT_DIR$/01day/6.v-for.html" />
-        <option value="$PROJECT_DIR$/01day/7.v-for2.html" />
         <option value="$PROJECT_DIR$/01day/7.v-for3.html" />
         <option value="$PROJECT_DIR$/01day/8.v-show.html" />
         <option value="$PROJECT_DIR$/01day/8.v-show2.html" />
@@ -119,6 +94,10 @@
         <option value="$PROJECT_DIR$/03day/3.v-cloak.html" />
         <option value="$PROJECT_DIR$/03day/2.购物车.html" />
         <option value="$PROJECT_DIR$/03day/2.购物车2.html" />
+        <option value="$PROJECT_DIR$/03day/4.demo.html" />
+        <option value="$PROJECT_DIR$/03day/5.check.html" />
+        <option value="$PROJECT_DIR$/03day/6.todo.html" />
+        <option value="$PROJECT_DIR$/03day/6.todo2.html" />
       </list>
     </option>
   </component>
@@ -140,6 +119,11 @@
             <path>
               <item name="1903B" type="b2602c69:ProjectViewProjectNode" />
               <item name="1903B" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1903B" type="b2602c69:ProjectViewProjectNode" />
+              <item name="1903B" type="462c0819:PsiDirectoryNode" />
+              <item name="03day" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -201,12 +185,12 @@
       <workItem from="1571815681826" duration="1134000" />
       <workItem from="1571817493940" duration="1644000" />
       <workItem from="1571841485065" duration="12000" />
-      <workItem from="1571877266202" duration="8713000" />
+      <workItem from="1571877266202" duration="14984000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31721000" />
+    <option name="totallyTimeSpent" value="37992000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="23" width="1392" height="797" extended-state="0" />
@@ -235,34 +219,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/01day/6.v-for.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/01day/7.v-for2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1863">
-          <caret line="69" column="41" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/01day/7.v-for3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2457">
-          <caret line="91" column="36" lean-forward="true" selection-start-line="91" selection-start-column="36" selection-end-line="91" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/01day/8.v-show2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/01day/9.v-if.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1944">
@@ -559,13 +515,6 @@
     <entry file="file://$PROJECT_DIR$/03day/js/vue.min.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/03day/1.随机点名表.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="104" column="13" lean-forward="true" selection-start-line="104" selection-start-column="13" selection-end-line="104" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/03day/3.v-cloak.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -582,8 +531,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/03day/2.购物车2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="138" column="31" selection-start-line="138" selection-start-column="31" selection-end-line="138" selection-end-column="31" />
+        <state relative-caret-position="-286">
+          <caret line="129" column="19" lean-forward="true" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/03day/4.demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-825">
+          <caret line="107" column="48" lean-forward="true" selection-start-line="107" selection-start-column="43" selection-end-line="107" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/03day/5.check.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/03day/1.随机点名表.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="104" column="13" lean-forward="true" selection-start-line="104" selection-start-column="13" selection-end-line="104" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/03day/6.todo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-880">
+          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/03day/6.todo2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="86" column="77" lean-forward="true" selection-start-line="86" selection-start-column="77" selection-end-line="86" selection-end-column="77" />
         </state>
       </provider>
     </entry>

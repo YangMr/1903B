@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        html,body,div,ul,li,a,span,strong{margin: 0; padding: 0;}
+        ol,ul{list-style: none;}
+        .app-wrap{width: 600px; margin: 20px auto; border-radius: 3px; border: 1px solid #ccc; padding: 10px;}
+        .app-wrap .app-header{}
+        .app-wrap .app-header input{width: 100%; text-indent: 2em; font-size: 14px; border: 1px solid #ccc; height: 33px; border-radius: 3px;}
+        .app-wrap .app-main{margin-top: 20px; border: 1px solid #ccc; border-radius: 3px; border-bottom: none;}
+        .app-wrap ul li{height: 35px; border-bottom: 1px solid #ccc; line-height: 35px; font-size: 12px;}
+        .app-wrap ul li button{float: right; position: relative; cursor: pointer; top: 8px; right: 20px;}
+        .app-wrap .app-footer{padding: 20px 0;}
+        .app-wrap .app-footer button{float: right; cursor: pointer; position: relative; top: 8px; right: 20px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <div class="app-wrap">
+            <!--header-->
+            <div class="app-header">
+                <input type="text" v-model="task" @keydown.enter="getInputValue" placeholder="请输入要添加的任务">
+            </div>
+            <!--main-->
+            <div class="app-main">
+                <ul v-if="list.length">
+                    <li v-for="(item,index) in list">
+                        <input @change="handleCheck(index)" :checked="item.check" type="checkbox">
+                        <strong>{{item.task}}</strong>
+                        <button @click="del(index)">删除</button>
+                    </li>
+                </ul>
+
+                <div v-else>请添加任务</div>
+            </div>
+            <!--底部-->
+            <div class="app-footer">
+                <input @change="checkAll" :checked="count == list.length" type="checkbox">
+                <span>已完成{{count}}件/总计{{list.length}}件</span>
+                <button @click="delAll">清除已完成的任务</button>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            task : "",
+            id : 1,
+            list : [],
+            count : 0
+        },
+        methods : {
+            //添加数据功能
+            getInputValue(){
+
+
+                //如果给本地进行数据存储的时候，本地没有数据，那么添加一条数据
+                //如果有数据的话，在原来的基础上进行追加
+                if(localStorage.getItem("arrList")){
+
+                    //获取原来本地存储的数据
+                    let oldData = localStorage.getItem("arrList");
+
+                    this.list = JSON.parse(oldData);
+
+                    // console.log(this.list);
+                    this.list.push({
+                        id : this.list[this.list.length - 1].id++,
+                        task : this.task,
+                        check : false
+                    });
+
+                    //重新存储到本地
+                    localStorage.setItem("arrList",JSON.stringify(this.list))
+
+                }else{
+
+
+                    this.list.push({
+                        id : this.id,
+                        task : this.task,
+                        check : false
+                    });
+                    localStorage.setItem("arrList",JSON.stringify(this.list));
+                }
+
+
+
+                // localStorage.setItem("arrList",JSON.stringify(list));
+
+
+
+                this.task = "";
+            },
+            //删除功能
+            del(index){
+                this.list.splice(index,1);
+                let dList= this.list.filter((item,index)=>{
+                    return item.check == true;
+                });
+                this.count = dList.length
+            },
+            //选中复选框
+            handleCheck(index) {
+                this.list[index].check = !this.list[index].check;
+
+                let result = this.list.filter((item,index)=>{
+                    return item.check
+                })
+
+                this.count = result.length;
+            },
+            //全选
+            checkAll(e){
+               let newList = this.list.filter((item,index)=>{
+                   return item.check = e.target.checked
+                });
+                this.count = newList.length;
+            },
+            //删除选中的任务
+            delAll(){
+                let delList = this.list.filter((item,index)=>{
+                    return item.check == false;
+                });
+
+                this.list = delList;
+            }
+        },
+        computed : {
+
+        },
+        watch : {
+
+        },
+        created(){
+            if(localStorage.getItem("arrList")){
+                this.list = JSON.parse(localStorage.getItem("arrList"))
+            }
+        }
+    })
+
+
+</script>

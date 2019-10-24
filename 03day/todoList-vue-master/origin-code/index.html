@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>todoMvc-vue</title>
+    <link rel="stylesheet" href="./src/css/index.css">
+</head>
+<body>
+<div>
+    <div id="app">
+        <header>
+            <h1>todos</h1>
+            <input type="text" class="new-todo" placeholder="What needs to be done?"
+                   @keyup.enter="addTodo" autocomplete="off" autofocus v-model="newTodo">
+        </header>
+        <main class="main">
+            <input type="checkbox" id="toggle-all" class="toggle-all" v-show="todoLists.length>0" @click="selectAllTodos">
+            <label for="toggle-all">Mark all items</label>
+            <ul class="todo-list">
+                <li v-for="(list,index) in todoLists" class="content_todoList" @mouseover="list.isActive = true"
+                @mouseleave="list.isActive = false" v-show="defaultShow || (whichShow?list.isCompleted:!list.isCompleted)" :key="list.id">
+                    <input type="checkbox" class="toggle" v-model="list.isCompleted" @click="liCompleted(index)">
+                    <label class="content_todoList_main" @dblclick="toEdit(list)" v-show="!list.isEditing" :class="{deleted: list.isCompleted}">
+                        {{list.value}}
+                    </label>
+                    <input type="text" class="content_todoList_main main_input"
+                           v-model="list.value"
+                           v-show="list.isEditing"
+                           v-todo-focus = "list.value"
+                           @blur="unEdit(list)">
+                    <button class="destroy" :class="{show: list.isActive}"
+                          @click="deleteTodo(index)"></button>
+                </li>
+            </ul>
+            <footer class="footer">
+                <span class="todo-count" v-show="times<=1">{{times}}&nbsp item left</span>
+                <span class="todo-count" v-show="times>1">{{times}}&nbsp items left</span>
+                <ul class="filters">
+                    <li><a href="#/" :class="{selected:index === dataStatusIndex}" v-for="(item,index) in dataStatus" @click="switchStatus(index)" :key="index">{{item}}</a></li>
+                </ul>
+                <button class="clear-completed" @click="clearTodos" v-show="times < todoLists.length">Clear Completed</button>
+                <button class="clear-completed" @click="clearTodos" v-show="times === todoLists.length"></button>
+            </footer>
+        </main>
+    </div>
+    <footer class="info">
+        <footer class="info">
+            <p>Double-click to edit a todo</p>
+            <p>Written by <a href="http://tonycatgogogo.github.io">Haitao</a></p>
+            <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+        </footer>
+    </footer>
+</div>
+</body>
+</html>
