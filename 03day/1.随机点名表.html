@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 200px;
+        }
+        .center{
+            text-align: center;
+        }
+
+        .active{
+            font-size: 30px;
+            color: #f60;
+            transition: 1s;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="app">
+
+
+        <div class="box" :class="{'active' : flag}">{{message}}</div>
+
+        <hr>
+
+        <div class="center">
+            <button @click="rand">点名</button>
+            <button @click="end">结束</button>
+        </div>
+
+        <hr>
+
+        <p>{{title}}</p>
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            message : "随机点名",
+            timer : null,
+            title : "",
+            flag : false,
+            arr : [
+                {
+                    id:1,
+                    name : "阿卡丽"
+                },
+                {
+                    id : 2,
+                    name : "德玛西亚"
+                },
+                {
+                    id : 3,
+                    name : "压缩"
+                },
+                {
+                    id : 4,
+                    name : "张三"
+                },
+                {
+                    id : 5,
+                    name : "王五"
+                }
+            ]
+        },
+        methods : {
+            randomNum(minNum,maxNum){
+                switch(arguments.length){
+                    case 1:
+                        return parseInt(Math.random()*minNum+1,10);
+                        break;
+                    case 2:
+                        return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10);
+                        break;
+                    default:
+                        return 0;
+                        break;
+                }
+            },
+            rand(){
+                this.flag = false;
+               this.timer = setInterval( () =>{
+                    this.message= this.arr[this.randomNum(0,4)].name
+                },30)
+            },
+            end(){
+                clearInterval(this.timer);
+                this.flag = true;
+                this.title = this.message;
+            }
+        }
+    })
+
+</script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="js/vue.min.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+
+        <h3 class="text-center">购物车功能</h3>
+
+        <hr>
+        <div class="container">
+            <template v-if="list.length">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>商品编号</th>
+                        <th>商品名称</th>
+                        <th>商品价格</th>
+                        <th>商品数量</th>
+                        <th>商品小计</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item,index) in list" :key="index">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.price}}</td>
+                        <td>
+                            <button @click="increment(index)">+</button>
+                            <input type="text" v-model="item.count">
+                            <button @click="decrement(index)">-</button>
+                        </td>
+                        <td>{{item.price * item.count}}</td>
+                        <td>
+                            <button @click="del(index)">删除</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="text-right" colspan="6">总计: {{totalPrice}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </template>
+
+            <div v-else>
+                购物车为空
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            list : [
+                {
+                    id : 1,
+                    name : "iPhone 11",
+                    price : 9998,
+                    count : 5
+                },
+                {
+                    id : 2,
+                    name : "iPad Pro",
+                    price : 6888,
+                    count : 3
+                },
+                {
+                    id : 3,
+                    name : "MacBook Pro",
+                    price : 15000,
+                    count : 2
+                }
+            ]
+        },
+        methods : {
+            increment(index) {
+
+                this.list[index].count++;
+            },
+            decrement(index) {
+
+                this.list[index].count--;
+            },
+            del(index){
+                this.list.splice(index,1);
+            }
+        },
+        computed : {
+            totalPrice(){
+                let total = 0;
+
+                this.list.forEach((item,index)=>{
+                    total += item.price * item.count;
+                })
+
+                return total.toString().replace(/\B(?=(\d{3})+$)/g,",");
+            }
+        },
+        watch : {
+
+        }
+    })
+
+</script>
