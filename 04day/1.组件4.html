@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+       <app-p></app-p>
+
+
+
+
+
+
+    </div>
+</body>
+</html>
+<script>
+
+
+    var a = {
+        message : "hello vue",
+        count : 0
+    }
+    //全局注册
+    Vue.component("app-p",{
+        template : `<div>
+            <p>{{message}}</p>
+            <button @click="changeMessage">changeMessage</button>
+            <hr>
+            {{result}}
+            <hr>
+            {{count}}
+            <hr>
+            <button @click="count+=2">++</button>
+        </div>`,
+        data : function () {
+            return a
+        },
+        methods : {
+            changeMessage(){
+                this.message = "hello message"
+            }
+        },
+        computed : {
+            result(){
+                return this.count > 10 ? "jack" : "rose"
+            }
+        },
+        watch : {
+
+        }
+    })
+
+
+    new Vue({
+        el : "#app",
+        data : function () {
+            return {
+                title : "hello"
+            }
+        }
+    })
+
+</script>
