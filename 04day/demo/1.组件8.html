@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <app-header></app-header>
+
+        {{title}}
+
+        <app-footer></app-footer>
+    </div>
+</body>
+</html>
+<script>
+
+
+    new Vue({
+        el : "#app",
+        components : {
+            "app-header" : {
+                template : `
+                    <div>
+                        <h1>{{title}}</h1>
+                        <button @click="title=110"></button>
+                    </div>
+                `,
+                data : function () {
+                    return {
+                        title : "123"
+                    }
+                },
+                methods : {
+
+                },
+                computed : {
+
+                },
+                watch : {
+
+                }
+            },
+            "app-footer" : {
+                template : `
+                    <div>
+
+                        <h1>我是footer</h1>
+                    </div>
+                `
+            }
+        },
+        data : function () {
+            return {
+                title : "456"
+            }
+        }
+    })
+
+
+</script>
