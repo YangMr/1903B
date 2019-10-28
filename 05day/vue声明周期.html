@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <hr>
+        <button @click="changeMessage">改变message</button>
+
+        <button @click="xiaohui">销毁实例</button>
+    </div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el : "#app",
+        data : {
+            message : "hello vue"
+        },
+        methods : {
+            changeMessage(){
+                this.message = "123";
+            },
+            xiaohui(){
+                this.$destroy()
+            }
+        },
+        beforeCreate(){
+            console.log("实例创建之前")
+        },
+        created(){
+            console.log("实例创建之后触发，这个页面没有被渲染")
+        },
+        beforeMount(){
+            console.log("id为app的元素未挂载vue实例上时触发")
+        },
+        mounted(){
+            console.log("当元素成功挂载vue实例上时触发，并且页面已经被渲染完成")
+        },
+        beforeUpdate(){
+            console.log("数据更新之前触发");
+        },
+        updated(){
+            console.log("数据更新之后触发")
+        },
+        beforeDestroy(){
+            console.log("实例销毁之前触发")
+        },
+        destroyed(){
+            console.log("实例销毁之后触发")
+        }
+    })
+
+</script>
