@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <button id="btn">clicks</button>
+
+    <button id="get">get</button>
+
+    <button id="del">del</button>
+
+    <button id="clear">clear</button>
+</body>
+</html>
+<script>
+
+    btn.onclick = function(){
+        window.localStorage.setItem("name",JSON.stringify({"name" : "jack" , "price" : "200"}))
+        window.localStorage.setItem("name2",JSON.stringify({"name" : "jack" , "price" : "200"}))
+        window.localStorage.setItem("name3",JSON.stringify({"name" : "jack" , "price" : "200"}))
+    }
+
+    get.onclick = function(){
+        console.log(JSON.parse(window.localStorage.getItem("name")))
+    }
+
+    del.onclick = function(){
+        window.localStorage.removeItem("name2")
+    }
+
+    clear.onclick = function(){
+        window.localStorage.clear();
+    }
+
+
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <button id="btn">add</button>
+</body>
+</html>
+<script>
+
+    var arr = ["张三","李四"]
+
+    btn.onclick = function(){
+        //如果能够获取到本地的数据，那么九执行if，如果没有则执行else
+        if(window.localStorage.getItem("list")){
+            arr = JSON.parse(window.localStorage.getItem("list"));
+            arr.push("王五");
+            window.localStorage.setItem("list",JSON.stringify(arr))
+        }else{
+            window.localStorage.setItem("list",JSON.stringify(arr))
+        }
+    }
+
+
+
+
+
+</script>

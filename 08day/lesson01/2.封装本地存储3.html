@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <button id="btn">add</button>
+</body>
+</html>
+<script>
+
+    var obj = {
+        //封装获取本地存储的数据
+        getLocalStorageData(key){
+            if(!window.localStorage.getItem(key)){
+                return null;
+            }else{
+                return JSON.parse(window.localStorage.getItem(key));
+            }
+        },
+        //设置存储本地的数据
+        setLocalStorageData(key,value){
+            window.localStorage.setItem(key,JSON.stringify(value));
+        }
+    };
+
+    btn.onclick = function(){
+        if(!obj.getLocalStorageData("list")){
+            obj.setLocalStorageData("list",["jack","rose"]);
+        }else{
+            var arr = obj.getLocalStorageData("list");
+            arr.push("hello");
+            obj.setLocalStorageData("list",arr);
+        }
+    }
+
+
+
+
+
+</script>
