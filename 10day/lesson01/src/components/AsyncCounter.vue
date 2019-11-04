@@ -6,8 +6,7 @@
 </template>
 
 <script>
-  import {mapMutations} from "vuex"
-  import {COUNTER_INCREMENT,COUNTER_DECREMENT} from "../store/types"
+  import {mapActions} from "vuex"
   export default {
     data() {
       return {
@@ -15,16 +14,19 @@
     },
     created() {
     },
+
     methods: {
-      // ...mapMutations([
+      // ...mapActions([
       //   "increment",
       //   "decrement"
       // ])
       increment(){
-        this.$store.commit(COUNTER_INCREMENT,10);
+        this.$store.dispatch("increment",{num : 20, time:3000});
+        this.$store.dispatch("asyncIncrement")
       },
       decrement(){
-        this.$store.commit(COUNTER_DECREMENT,10)
+        this.$store.dispatch("decrement",{num : 20, time:3000})
+        this.$store.dispatch("asyncDecrement")
       }
     }
   }

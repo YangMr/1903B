@@ -9,6 +9,13 @@
     <app-counter></app-counter>
     <hr>
     <app-another-counter></app-another-counter>
+    <hr>
+    <app-async-counter></app-async-counter>
+    <hr>
+
+    <input type="text" v-model="value">
+    <p>{{value}}</p>
+
   </div>
 </template>
 
@@ -17,6 +24,7 @@ import Counter from "./Counter.vue"
 import Result from "./Result.vue"
 import AnotherResult from "./AnotherResult.vue"
 import AnotherCounter from "./AnotherCounter.vue"
+import AsyncCounter from "./AsyncCounter.vue"
 export default {
   name: 'HelloWorld',
   data () {
@@ -24,14 +32,27 @@ export default {
 
     }
   },
+  computed : {
+    value : {
+      get(){
+          return this.$store.getters.value
+      },
+      set(value){
+        this.$store.commit("value",value)
+      }
+    }
+  },
   components : {
     "appCounter" : Counter,
     "appResult" : Result,
     "appAnotherResult" : AnotherResult,
-    "appAnotherCounter" : AnotherCounter
+    "appAnotherCounter" : AnotherCounter,
+    "appAsyncCounter" : AsyncCounter
   },
   methods : {
-
+    // get(event){
+    //   this.$store.commit("value",event.target.value)
+    // }
   }
 }
 </script>
