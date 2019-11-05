@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "rose",
+      "pass": "123456",
+      "realpass": "123456",
+      "email": "759168442@qq.com",
+      "sex": "男"
+    },
+    {
+      "id": 2,
+      "name": "rose",
+      "pass": "123456",
+      "realpass": "123456",
+      "email": "759168442@qq.com",
+      "sex": "男"
+    },
+    {
+      "id": 3,
+      "name": "rose",
+      "pass": "123456",
+      "realpass": "123456",
+      "email": "759168442@qq.com",
+      "sex": "男"
+    },
+    {
+      "id": 4
+    }
+  ]
+}
