@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63d15753-52f2-41c1-84ad-f06ade9c560a" name="Default Changelist" comment="" />
+    <list default="true" id="63d15753-52f2-41c1-84ad-f06ade9c560a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue课件/第九单元 Axios.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue课件/第九单元 Axios.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader" beforeDir="false" afterPath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/api/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/components/category/Bookcategory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/components/category/Bookcategory.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/components/search/Search.vue" beforeDir="false" afterPath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/components/search/Search.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/高级/01 教学案例演示/vue-nReader/src/main.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +32,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1SrTioFpVfKceJHk6mXIf23p3l0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -85,6 +97,8 @@
       <workItem from="1572336886589" duration="1019000" />
       <workItem from="1572396196827" duration="141000" />
       <workItem from="1572874494248" duration="637000" />
+      <workItem from="1572933156032" duration="217000" />
+      <workItem from="1572933441089" duration="1674000" />
     </task>
     <servers />
   </component>
