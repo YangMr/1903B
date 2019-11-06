@@ -25,6 +25,11 @@ const UserSchema = new Schema({
   avatar : {
     type : String
   },
+  //身份
+  identity : {
+    type : String,
+    required : true
+  },
   //时间
   date : {
     type : Date,

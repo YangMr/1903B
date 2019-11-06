@@ -344,25 +344,508 @@
 
 ### 11.26 搭建登录接口
 
+```javascript
+//登录接口
+router.post("/login",(req,res)=>{
+  //获取登录的密码
+  const password  = req.body.password;
+  //获取登录的邮箱
+  const email = req.body.email;
+  //查询数据库
+  User.findOne({email}).then(user=>{
+    //如果查找不到邮箱，则给前台返回用户不存在
+    if(!user){
+      return res.status(404).json({msg : "用户不存在"})
+    }
+    //对密码进行匹配
+    bcrypt.compare(password, user.password).then(isMatch=>{
+      if(isMatch){
+        res.json({msg : "success",code : 0, text : "登录成功"});
+      }else{
+        return res.status(400).json({msg : "密码错误"});
+      }
+    })
+  }).catch(error=>{
+    console.log(error)
+  })
+})
+```
+
+
+
 ### 11.27 使用jwt实现token
+
+  1. 安装jsonwebtoken
+
+     ```
+     cnpm install jsonwebtoken
+     ```
+
+		2. 引入jsonwebtoken
+
+     ```javascript
+     const jwt = require("jsonwebtoken");
+     ```
+
+		3. 使用jsonwebtoken
+
+     ```
+     jwt.sign("规则","加密的名字","过期时间","箭头函数")
+     ```
+
+		4. 设置规则
+
+     ```javascript
+     const rule = {id:user.id,name:user.name};
+     ```
+
+		5. 在keys.js文件内设置加密的名字
+
+     ```javascript
+     module.exports = {
+       mongoURI : "mongodb://127.0.0.1:27017/app",
+       secretOrKey : "secret"
+     };
+     ```
+
+		6. 引入keys.js文件，获取设置的加密名字
+
+     ```javascript
+     //获取加密的名字
+     const keys = require("../../config/keys.js");
+     //使用jsonwebtoken
+     jwt.sign(rule,keys.secretOrKey,"过期时间","回调函数")
+     ```
+
+		7. 设置过期时间
+
+     ```javascript
+     jwt.sign(rule,keys.secretOrKey,{expiresIn:3600},"回调函数")
+     ```
+
+		8. 在回调函数里面获取token
+
+     ```javascript
+     jwt.sign(rule,keys.secretOrKey,{expiresIn:3600},(error,token)=>{
+                 res.json({
+                   success : true,
+                   token : "yangmr" + token
+                 })
+             })
+     ```
+
+		9. 最终代码
+
+     ```javascript
+     //登录接口
+     router.post("/login",(req,res)=>{
+       //获取登录的密码
+       const password  = req.body.password;
+       //获取登录的邮箱
+       const email = req.body.email;
+     
+       //查询数据库
+       User.findOne({email}).then(user=>{
+         //如果查找不到邮箱，则给前台返回用户不存在
+         if(!user){
+           return res.status(404).json({msg : "用户不存在"})
+         }
+         //对密码进行匹配
+         bcrypt.compare(password, user.password).then(isMatch=>{
+           if(isMatch){
+     
+             //设置加密规则
+             const rule = {id:user.id,name:user.name};
+     
+             //使用jsonwebtoken
+             jwt.sign(rule,keys.secretOrKey,{expiresIn:3600},(error,token)=>{
+                 res.json({
+                   success : true,
+                   token : "yangmr" + token,
+                   code : 0,
+                   msg : "登录成功"
+                 })
+             })
+           }else{
+             return res.status(400).json({msg : "密码错误"});
+           }
+         })
+       }).catch(error=>{
+         console.log(error)
+       })
+     })
+     ```
+
+     
 
 ### 11.28 使用passport-jwt验证token
 
+  1. 创建验证token接口
+
+     ```javascript
+     router.get("/current","验证token",(req,res)=>{
+     
+     })
+     ```
+
+     
+
+  2. 安装passport-jwt和passport
+
+     ```
+     cnpm install passport-jwt passport --save
+     ```
+
+  3. 在app.js引入passport
+
+     ```javascript
+     //引入passport
+     const passport = require("passport");
+     ```
+
+  4. 对passport进入初始化
+
+     ```javascript
+     //初始化passport
+     app.use(passport.initialize());
+     ```
+
+		5. 在config文件夹内创建一个js文件，名称passport.js,对passport进行配置
+
+		6. 引入创建的passport.js
+
+		7. ```javascript
+     //引入passport
+     const passport = require("passport");
+     
+     //初始化passport
+     app.use(passport.initialize());
+     
+     //引入创建的passport.js
+     require("./config/passport.js")(passport);
+     ```
+
+		8. 在passport.js文件内进行配置
+
+     ```javascript
+     //引入passport-jwt
+     const JwtStrategy = require('passport-jwt').Strategy;
+     const ExtractJwt = require('passport-jwt').ExtractJwt;
+     
+     //引入mongoose
+     const mongoose = require("mongoose");
+     
+     //创建模型
+     const User = require("../model/User.js")
+     
+     //引入keys.js
+     const keys = require("./keys.js");
+     
+     const opts = {};
+     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+     opts.secretOrKey = keys.secretOrKey;
+     
+     
+     
+     //导出函数
+     module.exports = (passport)=>{
+       passport.use(new JwtStrategy(opts, (jwt_payload, done)=> {
+         //查询数据
+         User.findById(jwt_payload.id).then(user=>{
+           //判断用户存在不存在
+           if(user){
+             return done(null,user);
+           }
+           return done(null,false);
+         }).catch(error=>{
+           console.log(error);
+         })
+       })
+     );
+     }
+     ```
+
+		9. 在users.js路由文件中再次引入passport.js
+
+     ```javascript
+     const passport = require("passport");
+     ```
+
+		10. 在current接口验证token
+
+      ```javascript
+      //验证token接口
+      router.get("/current",passport.authenticate("jwt",{session : false}),(req,res)=>{
+        res.json({msg : "success"})
+      })
+      ```
+
+		11. 在登录接口修改token
+
+      ```javascript
+      //使用jsonwebtoken
+              jwt.sign(rule,keys.secretOrKey,{expiresIn:3600},(error,token)=>{
+                  res.json({
+                    success : true,
+                    token : "Bearer " + token,
+                    code : 0,
+                    msg : "登录成功"
+                  })
+              })
+      ```
+
+      就是把原来的yangmr改为**Bearer**
+
+		12. 修改current接口返回的数据
+
+      ```javascript
+      //验证token接口
+      router.get("/current",passport.authenticate("jwt",{session : false}),(req,res)=>{
+        res.json({
+          id : req.user.id,
+          name : req.user.name,
+          email : req.user.email
+        })
+      })
+      ```
+
+      
+
 ### 11.29 增加身份字段及接口调试
+
+  1. 在User.js文件添加身份字段
+
+     ```javascript
+     identity: {
+         type : String
+       },
+     ```
+
+		2. 在注册接口在添加身份字段
+
+     ```javascript
+     const newUser = new User({
+             name : req.body.name,
+             email : req.body.email,
+             avatar,
+             password : req.body.password,
+             identity : req.body.identity
+           });
+     ```
+
+		3. 在登录接口密码匹配那块在加入avatar和身份字段identity
+
+     ```javascript
+     const rule = {
+               id:user.id,
+               name:user.name,
+               avatar : user.avatar,
+               identity : user.identity
+             };
+     ```
+
+		4. 在current接口再把身份权限identity返回出去
+
+     ```javascript
+     res.json({
+           id: req.user.id,
+           name: req.user.name,
+           email: req.user.email,
+           identity: req.user.identity
+         });
+     ```
+
+		5. 在User.js文件内设置identity为必填
+
+     ```javascript
+     identity: {
+         type : String,
+         required : true
+       },
+     ```
+
+     
+
+		6. 最后，对接口在进行测试
 
 ### 11.30 数据信息接口介绍
 
+![image-20191106141709176](/Users/yangling/Library/Application Support/typora-user-images/image-20191106141709176.png)
+
+![image-20191106141822834](/Users/yangling/Library/Application Support/typora-user-images/image-20191106141822834.png)
+
+![image-20191106141852303](/Users/yangling/Library/Application Support/typora-user-images/image-20191106141852303.png)
+
 ### 11.31 配置信息接口
 
-### 11.32 更改数据库接口地址
+  1. 在model文件夹内创建Profile.js文件,该文件内主要是编写对数据的增加，修改，删除，更新等接口
 
-### 11.33 添加信息接口
+  2. 在Profiles.js文件内设置schema和模型
 
-### 11.34 获取所有以及单个信息
+  3. ```javascript
+     //引入mongoose
+     const mongoose = require("mongoose");
+     //获取schema
+     const Schema = mongoose.Schema;
+     //实例化schema，并定义字段
+     const ProfileSchema = new Schema({
+       type : {
+         type : String
+       },
+       describe : {
+         type : String
+       },
+       income : {
+         type : String,
+         required : true
+       },
+       expend : {
+         type : String,
+         required : true
+       },
+       cash : {
+         type : String,
+         required : true
+       },
+       remark: {
+         type : String
+       },
+       date : {
+         type : Date,
+         default : Date.now
+       }
+     });
+     //创建模型
+     const Profile = mongoose.model("profile",ProfileSchema);
+     //导出模型
+     module.exports = Profile;
+     ```
 
-### 11.35 编辑和删除信息接口
+		4. 在app.js文件内引入profiles.js
 
-### 11.36 前后端连载
+     ```javascript
+     //引入profiles.js二级路由
+     const profiles = require("./routes/api/profiles.js");
+     ```
 
-### 11.37 项目总结
+		5. 注册一级路由加载profiles.js二级路由
+
+		6. ```javascript
+     app.use("/api/profiles",profiles);
+     ```
+
+		7. 在api文件夹内创建profiles.js二级路由文件
+
+### 11.32 添加信息接口
+
+```javascript
+//添加信息接口
+router.post(
+  '/add',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const profileFields = {};
+
+    if (req.body.type) profileFields.type = req.body.type;
+    if (req.body.describe) profileFields.describe = req.body.describe;
+    if (req.body.income) profileFields.income = req.body.income;
+    if (req.body.expend) profileFields.expend = req.body.expend;
+    if (req.body.cash) profileFields.cash = req.body.cash;
+    if (req.body.remark) profileFields.remark = req.body.remark;
+
+    new Profile(profileFields).save().then(profile => {
+      res.json(profile);
+    });
+  }
+);
+```
+
+### 11.33 获取所有以及单个信息
+
+```javascript
+//获取所有信息接口
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.find()
+      .then(profile => {
+        if (!profile) {
+          return res.status(404).json('没有任何内容');
+        }
+
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
+//获取单个信息接口
+router.get(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ _id: req.params.id })
+      .then(profile => {
+        if (!profile) {
+          return res.status(404).json('没有任何内容');
+        }
+
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+```
+
+### 11.34 编辑和删除信息接口
+
+```javascript
+//编辑信息接口
+router.post(
+  '/edit/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const profileFields = {};
+
+    if (req.body.type) profileFields.type = req.body.type;
+    if (req.body.describe) profileFields.describe = req.body.describe;
+    if (req.body.income) profileFields.income = req.body.income;
+    if (req.body.expend) profileFields.expend = req.body.expend;
+    if (req.body.cash) profileFields.cash = req.body.cash;
+    if (req.body.remark) profileFields.remark = req.body.remark;
+
+    Profile.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: profileFields },
+      { new: true }
+    ).then(profile => res.json(profile));
+  }
+);
+
+//删除信息接口
+router.delete(
+  '/delete/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOneAndRemove({ _id: req.params.id })
+      .then(profile => {
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json('删除失败!'));
+  }
+);
+```
+
+### 11.35 前后端连载
+
+### 11.36 项目总结
+
+		1. 后台接口总结
+  		2. 前台element-ui框架总结
+  		3. 功能点总结
+  		4. 扩展
+         		1. 登录与注册的扩展
+         		2. 项目的扩展
+         		3. 个人技术栈的扩展
 

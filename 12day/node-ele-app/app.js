@@ -19,6 +19,18 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+//引入passport模块
+const passport = require("passport");
+
+//对passport模块进行初始化
+app.use(passport.initialize());
+
+
+
+//引入创建的passport.js文件
+require("./config/passport")(passport);
+
+
 
 //连接mongodb数据库
 mongoose.connect(db,{useNewUrlParser: true}).then(()=>{
@@ -30,8 +42,12 @@ mongoose.connect(db,{useNewUrlParser: true}).then(()=>{
 //引入users二级路由文件
 const users = require("./routes/api/users");
 
+//引入profiles.js二级路由文件
+const profiles = require("./routes/api/profiles");
+
 //通过一级路由去加载二级路由
 app.use("/api/users",users);
+app.use("/api/profiles",profiles);
 
 
 
