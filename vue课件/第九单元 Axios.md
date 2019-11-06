@@ -138,7 +138,7 @@
 
      ```javascript
      module.exports = {
-     	mongoURI : "mlab数据库的地址"
+     	mongoURI : "mongodb://127.0.0.1:27017/app"
      }
      ```
 
@@ -189,11 +189,158 @@
      app.use("/api/users",users);
      ```
 
-     
+  5. 在node-app目录下创建model文件夹
+
+  6. 在model文件夹内创建User.js,在该文件内定义schema和模型
+
+     ```javascript
+     //引入mongoose
+     const mongoose = require("mongoose");
+     //获取schema
+     const Schema = mongoose.Schema;
+     //实例化schema，并定义字段
+     const UserSchema = new Schema({
+       name : {
+         type : String,
+         required : true
+       },
+       email : {
+         type : String,
+         required : true
+       },
+       password: {
+         type : String,
+         required : true
+       },
+       avatar: {
+         type : String
+       },
+       date : {
+         type : Date,
+         default : Date.now()
+       }
+     });
+     //创建模型
+     const User = mongoose.model("users",UserSchema);
+     //导出模型
+     module.exports = User;
+     ```
 
 ### 11.24 搭建注册接口并存储数据
 
+  1. postman的下载使用
+
+  2. 注册并登录postman
+
+  3. 测试接口
+
+  4. 搭建注册接口
+
+     ```javascript
+     //引入bcrypt模块
+     const bcrypt =require("bcrypt");
+     //注册接口
+     router.post("/register",(req,res)=>{
+       //查询数据库中是否有要注册邮箱，如果没有，就可以进行注册，如何有,给前台返回提示数据
+       User.findOne({email : req.body.email}).then((user)=>{
+         if(user){
+           return res.status(400).json({email : "邮箱被注册"});
+         }else{
+           const newUser = new User({
+             name : req.body.name,
+             email : req.body.email,
+             password : req.body.password
+           });
+     
+           //这里的salt值，每次都是不一样的，也是根据取到不同的salt，所以每次的加密结果都不一样
+           bcrypt.genSalt(10, function (err, salt) {
+             bcrypt.hash(newUser.password, salt,(err, hash)=> {
+               if(err) throw err;
+               newUser.password = hash;
+     
+               newUser.save().then(user=>{
+                 res.json(user)
+               }).catch(error=>{
+                 console.log(error)
+               })
+             });
+           });
+         }
+       })
+     })
+     ```
+
+     5.密码加密
+
+     //安装bcrypt
+
+     cnpm install bcrypt --save
+
+     //引入bcrypt
+
+     const bcrypt = require("bcrypt");
+
+     //使用bcrypt
+         
+
+     ```javascript
+     bcrypt.genSalt(10, function (err, salt) {
+             bcrypt.hash(newUser.password, salt,(err, hash)=> {
+               if(error) throw error;
+               newUser.password = hash;
+             });
+           });
+     ```
+
+     
+
+  5. 安装body-parser模块,用来接收post方式传递的数据
+
+     ```javascript
+     //安装body-parser
+     cnpm install body-parser --save
+     
+     //配置
+     app.use(bodyParser.urlencoded({extended:false}));
+     app.use(bodyParser.json());
+     ```
+
+		6. 测试注册接口
+
 ### 11.25 使用全球公认头像gravatar
+
+  1. 安装gravatar
+
+     ```javascript
+     cnpm install gravatar --save
+     ```
+
+  2. 引入gravatar
+
+     ```javascript
+     const gravatar = require("gravatar");
+     ```
+
+		3. 使用gravatar
+
+     ​	看文档：https://www.npmjs.com/package/gravatar
+
+     ​	
+
+     ```javascript
+     //引入gravatar
+     const gravatar = require("gravatar");
+     var avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'});
+     
+     const newUser = new User({
+        name : req.body.name,
+        email : req.body.email,
+        avatar,
+        password : req.body.password
+     });
+     ```
+
+		4. 测试接口，看看是否能够获取到大头贴
 
 ### 11.26 搭建登录接口
 
@@ -201,7 +348,7 @@
 
 ### 11.28 使用passport-jwt验证token
 
-### 11.29 增加省份字段及接口调试
+### 11.29 增加身份字段及接口调试
 
 ### 11.30 数据信息接口介绍
 
