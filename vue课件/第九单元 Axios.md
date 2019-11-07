@@ -28,7 +28,217 @@
 
 ### 11.1 前端页面的准备工作
 
+  1. 使用vue-cli创建项目
+
+     vue init webpack client
+
+		2. 进入client目录
+
+     cd client
+
+		3. 安装项目所需要的依赖
+
+     cnpm install
+
+		4. 启动项目
+
+     npm start
+
+		5. 删除logo以及引入logo的标签
+
+		6. 删除Helloword.vue组件以及引入的路由
+
+		7. 在src目录下创建views文件夹
+
+		8. 在views文件夹内创建Index.vue组件
+
+		9. 在路由文件内配置Index.vue的路由
+
+		10. 在App.vue组件删除默认的css样式
+
+		11. 在App.vue组件设置html, body,#app的宽度高度为百分之百
+
+		12. 在assets文件夹内创建css文件夹
+
+		13. 在css文件夹内创建reset.css文件
+
+		14. 在index.html文件内引入reset.css
+
+		15. 在reset.css文件内设置默认样式
+
+      ```css
+      /* http://meyerweb.com/eric/tools/css/reset/
+         v2.0 | 20110126
+         License: none (public domain)
+      */
+      
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header, hgroup,
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+      	margin: 0;
+      	padding: 0;
+      	border: 0;
+      	font-size: 100%;
+      	font: inherit;
+      	vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure,
+      footer, header, hgroup, menu, nav, section {
+      	display: block;
+      }
+      body {
+      	line-height: 1;
+      }
+      ol, ul {
+      	list-style: none;
+      }
+      blockquote, q {
+      	quotes: none;
+      }
+      blockquote:before, blockquote:after,
+      q:before, q:after {
+      	content: '';
+      	content: none;
+      }
+      table {
+      	border-collapse: collapse;
+      	border-spacing: 0;
+      }
+      
+      .el-loading{
+        position: absolute;
+        z-index: 2000;
+        background-color: rgba(255,255,255,.7);
+        margin: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        -webkit-transition: opacity .3s;
+        transition: opacity .3s;
+      }
+      .el-loading-spinner{
+        top: 50%;
+        margin-top: -21px;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+      }
+      
+      ```
+
+      
+
 ### 11.2 设置Register和404组件
+
+  1. 导入素材
+
+  2. 在views文件夹内分别创建Register.vue组件和404组件
+
+  3. 在路由文件分别配置Register.vue组件和404组件的路由
+
+  4. 在404组件内设置内容
+
+     ```vue
+     <template>
+       <div class="notfound">
+         <img src="../assets/img/404.gif" alt="">
+       </div>
+     </template>
+     
+     <script>
+       export default {
+         data() {
+           return {
+           }
+         },
+         created() {
+         },
+         methods: {
+         }
+       }
+     </script>
+     
+     <style scoped>
+       .notfound{
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
+       }
+       .notfound img{
+         width: 100%;
+         height: 100%;
+       }
+     </style>
+     
+     ```
+
+		5. 在Register.vue组件设置背景图和标题
+
+     ```vue
+     <template>
+       <div class="register">
+         <section class="form_container">
+           <div class="manage_tip">
+             <span class="title">积云1903B在线后台管理系统</span>
+           </div>
+         </section>
+       </div>
+     </template>
+     
+     <script>
+       export default {
+         data() {
+           return {
+           }
+         },
+         created() {
+         },
+         methods: {
+         }
+       }
+     </script>
+     
+     <style scoped>
+     .register {
+       position: relative;
+       width: 100%;
+       height: 100%;
+       background: url(../assets/img/bg.jpg) no-repeat center center;
+       background-size: 100% 100%;
+     }
+     .form_container {
+       width: 370px;
+       height: 210px;
+       position: absolute;
+       top: 10%;
+       left: 34%;
+       padding: 25px;
+       border-radius: 5px;
+       text-align: center;
+     }
+     .form_container .manage_tip .title {
+       font-family: "Microsoft YaHei";
+       font-weight: bold;
+       font-size: 26px;
+       color: #fff;
+     }
+     </style>
+     
+     ```
+
+		6. 打开浏览器测试一下两个组件能否正常显示
 
 ### 11.3 搭建element注册表单
 
@@ -728,10 +938,13 @@ router.post("/login",(req,res)=>{
      const profiles = require("./routes/api/profiles.js");
      ```
 
-		5. 注册一级路由加载profiles.js二级路由
+  5. 注册一级路由加载profiles.js二级路由
 
-		6. ```javascript
-     app.use("/api/profiles",profiles);
+     6. ```javascript
+       app.use("/api/profiles",profiles);
+       ```
+     ```
+     
      ```
 
 		7. 在api文件夹内创建profiles.js二级路由文件
