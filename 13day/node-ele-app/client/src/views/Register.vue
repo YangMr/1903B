@@ -49,6 +49,13 @@
 <script>
   export default {
     data() {
+      var password2 = (rule, value, callback) => {
+         if (value !== this.registerUser.password) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
       return {
         registerUser : {
           name : "",
@@ -56,12 +63,98 @@
           password : "",
           password2 : "",
           identity : ""
+        },
+        rules : {
+          //验证用户名
+          name : [
+            {
+              required : true,
+              message : "用户名不能为空!",
+              trigger : "change"
+            },
+            {
+              min : 2,
+              max : 30,
+              message : "长度在2到30之间",
+              trigger : "blur"
+            }
+          ],
+          //验证邮箱
+          email : [
+            {
+              type : "email",
+              required : true,
+              message : "邮箱格式不正确!",
+              trigger : "blur"
+            }
+          ],
+          //密码验证
+          password : [
+            {
+              required : true,
+              message : "密码不能为空!",
+              trigger : "blur"
+            },
+            {
+              min : 6,
+              max : 30,
+              message : "长度6到30个字符",
+              trigger : "blur"
+            }
+          ],
+          //确认密码验证
+          password2 : [
+            {
+              required : true,
+              message : "密码不能为空!",
+              trigger : "blur"
+            },
+            {
+              min : 6,
+              max : 30,
+              message : "长度6到30个字符",
+              trigger : "blur"
+            },
+            {
+              validator: password2,
+              trigger: 'blur'
+            }
+          ],
+          //身份验证
+          identity : [
+            {
+              required : true,
+              message : "身份不能为空",
+              trigger : "change"
+            }
+          ]
         }
       }
     },
     created() {
     },
     methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            //进行注册
+            this.$axios.post("/api/users/register",this.registerUser).then(response=>{
+              // 注册成功
+                this.$message({
+                  message: "注册成功！",
+                  type: "success"
+                });
+
+                this.$router.push("/login");
+            }).catch(error=>{
+              console.log(error);
+            })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      }
     }
   }
 </script>

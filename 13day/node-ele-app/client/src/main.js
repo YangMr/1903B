@@ -14,6 +14,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 //将element-ui进行注册
 Vue.use(ElementUI)
 
+
+//引入http.js文件
+import axios from "./http.js";
+
+//将axios挂载到vue的原型上
+Vue.prototype.$axios = axios;
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

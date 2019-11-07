@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from "@/views/Index.vue"
 import Register from "@/views/Register";
 import NotFound from "@/views/404"
+import Login from "@/views/Login"
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +26,11 @@ export default new Router({
       path : "*",
       name : "/404",
       component : NotFound
+    },
+    {
+      path : "/login",
+      name : "login",
+      component : Login
     }
   ],
   mode : "history"
