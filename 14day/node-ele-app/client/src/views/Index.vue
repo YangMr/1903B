@@ -1,7 +1,10 @@
 <template>
   <div class="index">
+
     <head-nav></head-nav>
     <left-menu></left-menu>
+
+
   </div>
 </template>
 
@@ -11,9 +14,11 @@
   export default {
     data() {
       return {
+      
       }
     },
     created() {
+
     },
     methods: {
 

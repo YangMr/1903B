@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import jwt_decode from "jwt-decode";
   export default {
     data() {
       return {
@@ -65,7 +66,26 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.$axios.post("/api/users/login",this.loginUser).then(response=>{
+              console.log(response);
+
+              //获取token
+              const token = response.data.token;
+
+              //将token存储到本地
+              localStorage.setItem("eleToken",token);
+
+              //解析token
+              const decode = jwt_decode(token);
+
+              console.log(decode)
+
+              //跳转到首页
+              this.$router.push({name : "index"});
+
+            }).catch(error=>{
+              console.log(error);
+            })
           } else {
             console.log('error submit!!');
             return false;

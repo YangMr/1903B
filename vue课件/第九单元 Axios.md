@@ -45,25 +45,25 @@
      npm start
 
 		5. 删除logo以及引入logo的标签
-
+	
 		6. 删除Helloword.vue组件以及引入的路由
-
+	
 		7. 在src目录下创建views文件夹
-
+	
 		8. 在views文件夹内创建Index.vue组件
-
+	
 		9. 在路由文件内配置Index.vue的路由
-
+	
 		10. 在App.vue组件删除默认的css样式
-
+	
 		11. 在App.vue组件设置html, body,#app的宽度高度为百分之百
-
+	
 		12. 在assets文件夹内创建css文件夹
-
+	
 		13. 在css文件夹内创建reset.css文件
-
+	
 		14. 在index.html文件内引入reset.css
-
+	
 		15. 在reset.css文件内设置默认样式
 
       ```css
@@ -461,9 +461,250 @@ export default {
               }
       ```
 
+### token存储:
+
+​		
+
+```javascript
+submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$axios.post("/api/users/login", this.loginUser).then(res => {
+            // 登录成功
+            const { token } = res.data;
+            localStorage.setItem("eleToken", token);
+
+            // 页面跳转
+            this.$router.push("/index");
+          });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    }
+```
+
+
+
 ### 11.6 路由守卫和token过期处理
 
+  1. 通过路由守卫进行鉴权，判断能否进入鉴权页面
+
+     ```javascript
+     // 添加路由守卫
+     router.beforeEach((to, from, next) => {
+       const isLogin = localStorage.eleToken ? true : false;
+       if (to.path == "/login" || to.path == "/register") {
+         next();
+       } else {
+         isLogin ? next() : next("/login");
+       }
+     })
+     ```
+
+		2. token过期处理
+
+     ```javascript
+     //引入router
+     import router from './router'
+     
+     // 请求拦截  设置统一header
+     axios.interceptors.request.use(config => {
+         // 加载
+         startLoading()
+     	//判断是否能够获取到本地的token，如果能够获取到，则通过头信息发送过去
+         if (localStorage.eleToken)
+             config.headers.Authorization = localStorage.eleToken
+         return config
+     }, error => {
+         return Promise.reject(error)
+     })
+     
+     // 响应拦截  401 token过期处理
+     axios.interceptors.response.use(response => {
+         endLoading()
+         return response
+     }, error => {
+         // 错误提醒
+         endLoading()
+         Message.error(error.response.data)
+     	//如果状态吗为401，表示发送的请求需要有通过 HTTP 认证的认证信息，也就是token过期了
+         const { status } = error.response
+         if (status == 401) {
+             Message.error('token值无效，请重新登录')
+             // 清除token
+             localStorage.removeItem('eleToken')
+             // 页面跳转
+             router.push('/login')
+         }
+         return Promise.reject(error)
+     })
+     ```
+
+     
+
 ### 11.7 解析token并存储到vuex中
+
+  1. 安装解析token的模块
+
+     ```javascript
+     cnpm install jwt-decode --save
+     ```
+
+		2. 在登录页面引入jwt-decode模块	
+
+     ```javascript
+     import jwt_decode from "jwt-decode";
+     ```
+
+		3. 解析token获取到信息
+
+     ```javascript
+     // 解析token
+     const decode = jwt_decode(token);
+     ```
+
+		4. 安装vuex
+
+     ```
+     cnpm install axios --save
+     ```
+
+		5. 引入并进行配置
+
+     ```javascript
+     import Vue from 'vue'
+     import Vuex from 'vuex'
+     
+     Vue.use(Vuex)
+     
+     const types = {
+      
+     }
+     
+     const state = { // 需要维护的状态
+       
+     }
+     
+     const getters = {
+       
+     }
+     
+     const mutations = {
+       
+     }
+     
+     const actions = {
+       
+     }
+     
+     export default new Vuex.Store({
+       state,
+       getters,
+       mutations,
+       actions
+     })
+     
+     ```
+
+     
+
+		6. 在vuex中编写token的存储方式
+
+     ```javascript
+     import Vue from 'vue'
+     import Vuex from 'vuex'
+     
+     Vue.use(Vuex)
+     
+     const types = {
+       SET_IS_AUTNENTIATED: 'SET_IS_AUTNENTIATED', // 是否认证通过
+       SET_USER: 'SET_USER' // 用户信息
+     }
+     
+     const state = { // 需要维护的状态
+       isAutnenticated: false,  // 是否认证
+       user: {}   // 存储用户信息
+     }
+     
+     const getters = {
+       isAutnenticated: state => state.isAutnenticated,
+       user: state => state.user
+     }
+     
+     const mutations = {
+       [types.SET_IS_AUTNENTIATED](state, isAutnenticated) {
+         if (isAutnenticated)
+           state.isAutnenticated = isAutnenticated
+         else
+           state.isAutnenticated = false
+       },
+       [types.SET_USER](state, user) {
+         if (user)
+           state.user = user
+         else
+           state.user = {}
+       }
+     }
+     
+     const actions = {
+       setIsAutnenticated: ({ commit }, isAutnenticated) => {
+         commit(types.SET_IS_AUTNENTIATED, isAutnenticated)
+       },
+       setUser: ({ commit }, user) => {
+         commit(types.SET_USER, user)
+       },
+       clearCurrentState: ({ commit }) => {
+         commit(types.SET_IS_AUTNENTIATED, false)
+         commit(types.SET_USER, null)
+       }
+     }
+     
+     export default new Vuex.Store({
+       state,
+       getters,
+       mutations,
+       actions
+     })
+     
+     ```
+
+		7. 将token存储到vuex中
+
+     ```javascript
+      // 存储数据
+        this.$store.dispatch("setIsAutnenticated", !this.isEmpty(decode));
+                 this.$store.dispatch("setUser", decode);
+     ```
+
+		8. 当重新在浏览器打开项目时，判断本地有没有token，在app.js文件内设置：
+
+     ```javascript
+     import jwt_decode from "jwt-decode";
+     export default {
+       name: "app",
+       created() {
+         if (localStorage.eleToken) {
+           const decode = jwt_decode(localStorage.eleToken);
+           this.$store.dispatch("setIsAutnenticated", !this.isEmpty(decode));
+           this.$store.dispatch("setUser", decode);
+         }
+       },
+       methods: {
+         isEmpty(value) {
+           return (
+             value === undefined ||
+             value === null ||
+             (typeof value === "object" && Object.keys(value).length === 0) ||
+             (typeof value === "string" && value.trim().length === 0)
+           );
+         }
+       }
+     };
+     ```
+
+     
 
 ### 11.8 设计顶部导航
 
@@ -936,9 +1177,9 @@ router.post("/login",(req,res)=>{
      ```
 
 		5. 在config文件夹内创建一个js文件，名称passport.js,对passport进行配置
-
+	
 		6. 引入创建的passport.js
-
+	
 		7. ```javascript
      //引入passport
      const passport = require("passport");
@@ -952,7 +1193,7 @@ router.post("/login",(req,res)=>{
 
 		8. 在passport.js文件内进行配置
 
-     ```javascript
+     ​```javascript
      //引入passport-jwt
      const JwtStrategy = require('passport-jwt').Strategy;
      const ExtractJwt = require('passport-jwt').ExtractJwt;

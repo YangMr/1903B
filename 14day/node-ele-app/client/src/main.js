@@ -14,6 +14,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 //将element-ui进行注册
 Vue.use(ElementUI)
 
+//引入vuex
+import store from "./store/store.js"
 
 //引入http.js文件
 import axios from "./http.js";
@@ -28,6 +30,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
