@@ -14,26 +14,24 @@
                 </el-menu-item>
               </router-link>
 
+              <template  v-for="(item,index) in items" >
+                    <el-submenu v-if="item.children" :index="item.path" :key="item.path">
+                        <template slot="title">
+                            <i :class="'fa fa-margin '+item.icon"></i>
+                            <span slot="title">{{item.name}}</span>
+                        </template>
+                        <router-link v-for="(citem,cindex) in item.children"
+                            :to="citem.path" :key="cindex">
+                            <el-menu-item
+                                :index='citem.path'>
+                                <span slot="title">{{citem.name}}</span>
+                            </el-menu-item>
+                        </router-link>
+                    </el-submenu>
 
-        <el-submenu index="2">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span>资金管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="1-1">资金流水</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
+                </template>
 
-        <el-submenu index="3">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span>信息管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="1-1">个人信息</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
+
 
         </el-menu>
     </el-col>
@@ -44,6 +42,20 @@
   export default {
     data() {
       return {
+        items : [
+          {
+            icon: "fa-money",
+            name: "资金管理",
+            path: "fund",
+            children: [{ path: "foundlist", name: "资金流水" }]
+          },
+          {
+            icon: "fa-asterisk",
+            name: "信息管理",
+            path: "info",
+            children: [{ path: "infoshow", name: "个人信息" }]
+          }
+        ]
       }
     },
     created() {

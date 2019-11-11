@@ -6,6 +6,7 @@ import NotFound from "@/views/404"
 import Login from "@/views/Login"
 import Home from "@/views/Home"
 import InfoShow from "@/views/InfoShow"
+import FoundList from "@/views/FoundList"
 Vue.use(Router)
 
 const router = new Router({
@@ -20,8 +21,8 @@ const router = new Router({
       component: Index,
       children : [
         {
-          path : "",
-          component : Home
+          path : "/",
+          redirect : "/index/home"
         },
         {
           path : "/index/home",
@@ -32,6 +33,11 @@ const router = new Router({
           path : "/index/infoshow",
           name : "infoshow",
           component : InfoShow
+        },
+        {
+          path : "/index/foundlist",
+          name : "foundlist",
+          component : FoundList
         }
       ]
     },

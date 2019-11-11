@@ -90,7 +90,7 @@ router.post("/login",(req,res)=>{
           }
 
           //使用jsonwebtoken模块,生成token
-          jwt.sign(rule,keys.secretOrKey,{expiresIn:10},(error,token)=>{
+          jwt.sign(rule,keys.secretOrKey,{expiresIn:3600},(error,token)=>{
             res.json({
               code : 0,
               msg : "success",

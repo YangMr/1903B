@@ -86,7 +86,7 @@
               this.$store.dispatch("setUser", decode);
 
               //跳转到首页
-              this.$router.push({name : "index"});
+              this.$router.push({name : "home"});
 
             }).catch(error=>{
               console.log(error);
