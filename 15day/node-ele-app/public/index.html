@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">post</button>
+</body>
+</html>
+<script src="javascripts/jquery.js"></script>
+<script>
+
+  $(function(){
+    $("button").click(function(){
+      $.ajax({
+        url : "/api/users/register",
+        method : "POST",
+        data : {
+          email : "123@qq.com"
+        },
+        success : function(response){
+          console.log(response)
+        }
+      })
+    })
+  })
+
+</script>
